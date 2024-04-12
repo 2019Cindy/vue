@@ -4,3 +4,7 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/2019Cindy/vue.git
 git push -u origin main
+
+
+git status查看哪些文件发生了变化
+git diff查看文件发生了哪些变化:（wq推出）
