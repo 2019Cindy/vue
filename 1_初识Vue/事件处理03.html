@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>键盘事件</title>
+  <script src='../js/vue.js'></script>
+</head>
+
+<body>
+  <!-- 小结：
+    1.Vue中常用的按键别名：
+      回车：enter
+      删除：delete，捕获delete和backspace
+      退出：esc
+      空格：space
+      换行：tab，必须配合keydown使用
+      上：up
+      下：down
+      左：left
+      右：right
+    2.Vue中未提供别名的按键，可使用原始的key值进行绑定，但注意要转为（CapsLock）caps-lock形式
+    3.系统修饰键（用法特殊）：ctrl、shift、alt、win
+      配合keyup使用时，按下修饰键的同时，在按下其他键，随后释放其他键，事件才被触发
+      配合keydown使用时，正常触发事件
+    4.可以使用keycode编码指定具体的按键，不推荐使用
+    5.Vue.config.keyCodes.自定义别名=keyCode，去指定按键别名
+ -->
+  <div class="root">
+    <h1>欢迎来到{{name}}</h1>
+    <!-- 2.Vue中未提供别名的按键，可使用原始的key值进行绑定，但注意要转为（CapsLock）caps-lock形式 -->
+    <!-- <input type="text" placeholder='按下回车进行提示' @keyup.backspace='keyupEvent'> -->
+    <!-- <input type="text" placeholder='按下回车进行提示' @keyup.ctrl='keyupEvent'> -->
+    <!-- <input type="text" placeholder='按下回车进行提示' @keyup.13='keyupEvent'> -->
+    <input type="text" placeholder='按下回车进行提示' @keyup.huiche='keyupEvent'>
+  </div>
+  <script>
+    Vue.config.keyCodes.huiche = 13
+    new Vue({
+      el: '.root',
+      data: {
+        name: '花花的世界'
+      },
+      methods: {
+        keyupEvent(e) {
+          // console.log(e.target.value)
+          console.log(e.key, e.keyCode)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

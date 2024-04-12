@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MVVM模型</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <!-- 小结：
+    MVVM模型：
+      1.M：模型model，data中的数据
+      2.V：视图view，模板代码
+      3.VM：视图模型viewModel，vue实例
+    总结：
+      1.data中所有的属性，最后都出现在了vm身上
+      2.vm身上所有的属性及vue原型上所有的属性，在vue模板中都可以直接使用
+  -->
+  <div class="root">
+    <h1>学校：{{school}}</h1>
+    <h1>地址：{{address}}</h1>
+  </div>
+  <script>
+    new Vue({
+      el: '.root',
+      data: {
+        school: "湖大",
+        address: "湖南"
+      }
+    })
+  </script>
+</body>
+
+</html>

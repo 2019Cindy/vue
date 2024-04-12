@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="事件修饰符" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src='../js/vue.js'></script>
+  <style>
+    * {
+      margin-top: 20px
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 小结：
+    Vue中的事件修饰符：
+      1.prevent：阻止默认事件
+      2.stop：阻止事件冒泡
+      3.once：事件只触发一次
+
+      4.capture：使用事件的捕获模式
+      5.self：只有event.target是当前操作的元素时才触发事件
+      6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕
+  -->
+  <div class="root">
+    <h1>欢迎来到{{name}}学习</h1>
+    <!-- 阻止默认事件 -->
+    <a href="https://www.baidu.com/" @click.prevent='showInfo'>点我跳转</a>
+    <div class="demo1" @click='showInfo'>
+      <!-- 阻止事件冒泡 -->
+      <button style="height: 20px;background-color:pink;" @click.stop='showInfo'>click me</button>
+    </div>
+    <!-- 事件只触发一次 -->
+    <button style="height: 20px;background-color:pink;" @click.once='showInfo'>click me once</button>
+    <!-- 使用事件的捕获模式 -->
+    <div class="box1" style="height: 20px;background-color: yellow;" @click.capture='showMsg(1111)'>
+      div1
+      <div class="box2" style="height: 20px;background-color: green;" @click='showMsg(2222)'>
+        div2
+      </div>
+    </div>
+
+    <!-- 只有event.target是当前操作的元素时才触发事件 -->
+    <div class="demo1" @click.self='showInfo'>
+      <button style="height: 20px;background-color:pink;">click me</button>
+    </div>
+
+
+    <!-- 事件的默认行为立即执行，无需等待事件回调执行完毕 -->
+    <textarea style="height: 200px;width: 100px;overflow: auto;"
+      @wheel.passive='wheelEvent'>shdfjhjkhfjueyruhjfjs4162562354265346hsjfhsjhfdjshdfj233482582jfskdjflsdjfkljkhjskdhfj几乎都是飞机喀什地方还是决定恢复上课了收到附件红色的副教授副教授看到回复时间发货及时看到恢复数据库的发挥25374263546253462354652364562348172981728937182937198hjdfhsjkhfjkshdjfhjshdfkjshdjfhsjkdhfjsdhfjshdjfhsdjh</textarea>
+  </div>
+
+  <script>
+    new Vue({
+      el: '.root',
+      data: {
+        name: 'atguigu'
+      },
+      methods: {
+        showInfo(e) {
+          // e.preventDefault()
+          // e.stopPropagation()
+          alert("hello world!")
+        },
+        showMsg(msg) {
+          console.log(msg)
+        },
+        wheelEvent() {
+          for (let i = 0; i < 1000; i++) {
+            console.log("#####")
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
