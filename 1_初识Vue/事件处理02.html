@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="事件修饰符" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>事件修饰符</title>
   <script src='../js/vue.js'></script>
   <style>
     * {
@@ -30,7 +30,9 @@
     <a href="https://www.baidu.com/" @click.prevent='showInfo'>点我跳转</a>
     <div class="demo1" @click='showInfo'>
       <!-- 阻止事件冒泡 -->
-      <button style="height: 20px;background-color:pink;" @click.stop='showInfo'>click me</button>
+      <!-- <button style="height: 20px;background-color:pink;" @click.stop='showInfo'>click me</button> -->
+      <!-- 修饰符可以连续写 -->
+      <a href="https://www.baidu.com/" @click.stop.prevent='showInfo'>点我跳转百度</a>
     </div>
     <!-- 事件只触发一次 -->
     <button style="height: 20px;background-color:pink;" @click.once='showInfo'>click me once</button>

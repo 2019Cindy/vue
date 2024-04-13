@@ -34,6 +34,9 @@
     <!-- <input type="text" placeholder='按下回车进行提示' @keyup.ctrl='keyupEvent'> -->
     <!-- <input type="text" placeholder='按下回车进行提示' @keyup.13='keyupEvent'> -->
     <input type="text" placeholder='按下回车进行提示' @keyup.huiche='keyupEvent'>
+
+    <input type="text" placeholder='按下ctrl+y进行提示' @keyup.ctrl.y='keyupEvent'>
+
   </div>
   <script>
     Vue.config.keyCodes.huiche = 13
