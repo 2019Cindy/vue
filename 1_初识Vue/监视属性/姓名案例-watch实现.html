@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>姓名案例-watch实现</title>
+  <script src='../../js/vue.js'></script>
+</head>
+
+<body>
+  <!-- 小结：
+    computed和watch之间的区别：
+      1.computed能完成的功能，watch都可以完成
+      2.watch能完成的功能，computed不一定能完成，如watch可以进行异步操作，setTimeout
+
+    小原则：
+      1.所被vue管理的函数，最好写成普通函数，这样this的指向才是vm或组件实例对象
+      2.所有不被vue管理的函数（定时器的回调函数、ajax的回调函数等、promise的回调函数），最好写成箭头函数，这样this的指向才是vm或组件实例对象
+-->
+  <div class="root">
+    姓：<input type="text" v-model:value="firstName">
+    名：<input type="text" v-model:value='lastName'>
+    姓名：<span>{{fullName}}</span>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: '.root',
+      data: {
+        firstName: '张',
+        lastName: '三',
+      },
+      watch: {
+        name: {
+          deep: true,
+          handler(newValue, oldValue) {
+            console.log('全名发生改变....', newValue, oldValue)
+          }
+        }
+      },
+      computed: {
+        fullName: {
+          get() {
+            return this.firstName + '-' + this.lastName
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
