@@ -7,4 +7,6 @@ git push -u origin main
 
 
 git status查看哪些文件发生了变化
-git diff查看文件发生了哪些变化:（wq推出）
+git diff查看文件发生了哪些变化:（wq退出）
+git config --global core.quotepath false  命令行中文显示乱码
+git rm --cached filename (撤销指定目标文件)
