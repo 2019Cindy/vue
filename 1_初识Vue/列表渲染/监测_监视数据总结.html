@@ -32,6 +32,7 @@
       <button @click="modifyFriend">修改第一个朋友的名字：张三</button>
       <button @click="addHobby">添加一个爱好</button>
       <button @click="modifyHobby">修改第一个爱好为：游戏</button>
+      <button @click="filterHobby">过滤掉爱好中的‘吃饭’</button>
       <h2>姓名：{{student.name}}</h2>
       <h2>年龄：{{student.age}}</h2>
       <h2 v-if="student.sex">性别：{{student.sex}}</h2>
@@ -82,6 +83,11 @@
             // this.student.hobby.unshift("游戏");
             // this.student.hobby.splice(0, 1, "游戏");
             Vue.set(this.student.hobby, 0, "游戏");
+          },
+          filterHobby() {
+            this.student.hobby = this.student.hobby.filter((h) => {
+              return h !== "吃饭";
+            });
           },
         },
       });

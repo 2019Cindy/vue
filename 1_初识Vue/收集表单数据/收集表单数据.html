@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>收集表单数据</title>
+    <script src="../../js/vue.js"></script>
+  </head>
+  <body>
+    <div class="root">
+      <!-- 小结：
+        收集表单数据：
+          1.若<input type='text'>，则v-model收集的是value的值，用户输入就是value的值
+          2.若<input type='radio'>，则v-model收集的是value的值，且要给标签配置value值
+          3.若<input type='checkbox'>， 
+              没有配置value属性，收集的就是checked（勾选或不勾选，布尔值）
+              配置了value属性，
+                v-model的初始值是非数组，收集的就是checked（勾选或不勾选，布尔值）
+                v-model的初始值是数组，收集的就是value组成的数组
+          4.备注：v-model的三个修修饰符
+              lazy：失焦时收集数据
+              number：输入的字符串转为有效的数字
+              trim：去除首位空格
+      -->
+      <form @submit.prevent="submit">
+        账号： <input type="text" v-model.trim:value="username" /><br />
+        密码： <input type="text" v-model:value="password" /><br />
+        性别: 男<input
+          type="radio"
+          name="sex"
+          v-model:value="sex"
+          value="male"
+        />
+        女<input
+          type="radio"
+          name="sex"
+          v-model:value="sex"
+          value="female"
+        /><br />
+        年龄：<input type="number" v-model.number="age" /> 爱好： 吃饭<input
+          type="checkbox"
+          name="hobby"
+          v-model:value="hobby"
+          value="吃饭"
+        />
+        睡觉<input
+          type="checkbox"
+          name="hobby"
+          v-model:value="hobby"
+          value="睡觉"
+        />
+        打豆豆<input
+          type="checkbox"
+          name="hobby"
+          v-model:value="hobby"
+          value="打豆豆"
+        />
+        <br />
+        所属校区：
+        <select v-model:value="city">
+          <option value="">请选择校区</option>
+          <option value="beijing">北京</option>
+          <option value="shanghai">上海</option>
+          <option value="wuhan">武汉</option></select
+        ><br />
+        其他信息：
+        <!-- lazy:失焦时收集内容信息 -->
+        <textarea v-model.lazy:value="otherInfos"></textarea><br />
+        <input type="checkbox" v-model:value="agree" />阅读并接受<a
+          href="https://www.baidu.com/"
+          >《用户协议》</a
+        >
+        <button>提交</button>
+        <!-- <input type="button" value="提交" /> -->
+      </form>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: ".root",
+        data: {
+          // userInfo:{}
+          username: "",
+          password: "",
+          age: "",
+          sex: "female",
+          hobby: [], // 勾选框
+          city: "beijing",
+          otherInfos: "",
+          agree: "",
+        },
+        methods: {
+          submit() {
+            // alert("hhhh");
+            // console.log(JSON.stringify(this.userInfo));
+            console.log(JSON.stringify(this._data));
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
