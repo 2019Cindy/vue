@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模拟数据检测</title>
+  </head>
+  <body>
+    <div class="root"></div>
+    <script>
+      let data = {
+        name: "尚硅谷",
+        add: "北京",
+      };
+
+      // 定时器模拟
+      //   let tmp = "尚硅谷";
+      //   setInterval(() => {
+      //     if (data.name != tmp) {
+      //       tmp = data.name;
+      //       console.log("name被修改");
+      //     }
+      //   }, 100);
+
+      //   Object.defineProperty(data, "name", {
+      //     get() {
+      //       return data.name; // 死循环
+      //     },
+      //     set(val) {
+      //       data.name = val; // 死循环
+      //     },
+      //   });
+
+      //   简单模拟vm中的监视
+      // 创建一个监视的示例对象，用于监视data中属性的变化
+      const obs = new Observer(data);
+
+      let vm = {};
+      vm._data = data = obs;
+      function Observer(obj) {
+        // 汇总对象中所有的属性，形成一个数组
+        const keys = Object.keys(obj);
+        // 遍历
+        keys.forEach((k) => {
+          Object.defineProperty(this, k, {
+            get() {
+              console.log("this...", this);
+              return obj[k];
+            },
+            set(val) {
+              console.log(`${k}被修改了，要去解析模板，生成虚拟dom。。。`);
+              obj[k] = val;
+            },
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue监测数据改变原理_数组</title>
+    <script src="../../js/vue.js"></script>
+  </head>
+  <body>
+    <div class="root">
+      <h1>学生基本信息</h1>
+      <h2>姓名：{{student.name}}</h2>
+      <h2>年龄：{{student.age}}</h2>
+      <h2>性别：{{student.sex}}</h2>
+      <h2>爱好：</h2>
+      <!-- Vue将监听数组变更方法进行了包裹（执行原型下的数组方法，触发更新视图），
+        被包裹的方法有：splice、push、pop、shift、unshift、reverse、sort -->
+      <button @click="modifyHobby">点我修改爱好</button>
+      <ul>
+        <li v-for="(h,index) in student.hobby" :key="index">{{h}}</li>
+      </ul>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: ".root",
+        data: {
+          student: {
+            name: "Cindy",
+            age: 20,
+            sex: "女",
+            hobby: ["吃饭", "睡觉", "打豆豆"],
+          },
+        },
+        methods: {
+          modifyHobby() {
+            this.student.hobby.push("hhh");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
