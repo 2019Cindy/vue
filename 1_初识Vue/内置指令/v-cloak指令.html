@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-cloak指令</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 小结：
+    v-cloak指令：
+      1.本质是一个特殊结构，Vue实例创建完毕并接管容器后，会删掉v-cloak属性
+      2.使用css样式配合v-cloak可以解决网速慢时页面展示出{{xxx}}的问题
+  -->
+  <div class="root">
+    <h2 v-cloak>{{name}}</h2>
+  </div>
+  <script src='../../js/vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: '.root',
+      data: {
+        name: 'hello'
+      }
+    })
+  </script>
+</body>
+
+</html>
