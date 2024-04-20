@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>过滤器</title>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/dayjs.min.js"></script>
+  </head>
+  <body>
+    <!-- 小结：
+        过滤器：对显示的数据进行特定格式的转换后再显示
+        语法：
+            1.注册过滤器：Vue.filter(name,callback)或new Vue({filters:{}})
+            2.使用过滤器：{{xxx | 过滤器名}} 或 v-bind：属性='xxx | 过滤器名'
+        备注：
+            1.过滤器可以接受额外参数，多个过滤器可以串联
+            2.并没有改变原本的数据，是产生新的对应数据
+    -->
+    <div class="root">
+      <h1>格式化后的时间</h1>
+      <!-- 计算属性实现 -->
+      <h1>现在的时间是：{{formateTime}}</h1>
+      <!-- methods实现 -->
+      <h1>现在的时间是：{{getFormateTime()}}</h1>
+      <!-- 过滤器实现 -->
+      <h1>现在的时间是：{{time |timeFormate}}</h1>
+      <h1>现在的时间是：{{time |timeFormate("YYYY年MM月DD")}}</h1>
+      <h1>过滤器串联：{{time |timeFormate("YYYY年MM月DD") | slice}}</h1>
+    </div>
+    <div class="root2">
+      <h1>{{message | slice}}</h1>
+    </div>
+    <script>
+      // 全局过滤器
+      Vue.filter("slice", function (value) {
+        return value.substring(0, 5);
+      });
+      const vm = new Vue({
+        el: ".root",
+        data: {
+          time: "1713266309886",
+        },
+        computed: {
+          formateTime: {
+            get() {
+              return dayjs(this.time).format("YYYY-MM-DD HH:mm:ss");
+            },
+          },
+        },
+        methods: {
+          getFormateTime() {
+            return dayjs(this.time).format("YYYY-MM-DD HH:mm:ss");
+          },
+        },
+        // 局部过滤器
+        filters: {
+          //   timeFormate(value, formate) {
+          //     console.log(value);
+          //     if (formate) return dayjs(value).format(formate);
+          //     return dayjs(value).format("YYYY-MM-DD HH:mm:ss");
+          //   },
+          // js中形参默认值
+          timeFormate(value, formate = "YYYY-MM-DD HH:mm:ss") {
+            console.log(value);
+            return dayjs(value).format(formate);
+          },
+          slice(value) {
+            console.log(value);
+            return value.substring(0, 4);
+          },
+        },
+      });
+
+      const vm2 = new Vue({
+        el: ".root2",
+        data: { message: "hello world" },
+      });
+    </script>
+  </body>
+</html>
