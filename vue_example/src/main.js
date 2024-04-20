@@ -6,6 +6,15 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
+/**
+ * 小结：
+ * 关于不同版本的vue
+ * 1.vue.js与vue.runtime.xxx.js的区别：
+ *    （1）vue.js是完整版的vue，包含：核心功能+模板解析器
+ *    （2）vue.runtime.xxx.js是运行版的vue，只包含核心功能，没有模板解析器
+ * 2.因为vue.runtime.xxx.js 没有模板解析器，所以不能使用template配置项，需要使用
+ * render函数接收到的createElement函数指定具体的内容
+ */
 // new Vue({
 //   render: h => h(App),
 // }).$mount('#app')
