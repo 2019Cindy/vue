@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src='../../js/vue.js'></script>
+</head>
+
+<body>
+  <!-- 小结：
+    注意点：
+      1.组件名：
+        一个单词组成：
+          （1）首字母小写：school
+          （2）首字母大写：School
+        多个单词组成：
+          kebab-case命名：my-school
+          CamelCase命名：MySchool
+        注意：
+          组件名尽可能回避html中已有的元素名称，如h2等
+          可以使用name配置项指定组件在vue开发者工具中呈现的名字
+      2.组件标签：
+        （1）<school></school>
+        （2）<school/>
+        注意：不适用脚手架时，<school/>会导致后续组件不能渲染
+      3.简写方式：
+        const school = Vue.extend(options) 可简写为：const school = options
+  -->
+  <div class="root">
+    <h1>{{msg}}</h1>
+    <my-school></my-school>
+  </div>
+  <script>
+    // const school = Vue.extend({
+    //   name: 'atguigu',
+    //   template: `
+    //   <div>
+    //     <h1>学校名称：{{schoolName}}</h1>
+    //     <h1>学校地址：{{address}}</h1>
+    //   </div>
+    //   `,
+    //   data() {
+    //     return {
+    //       schoolName: '尚硅谷',
+    //       address: '武汉'
+    //     }
+    //   }
+    // })
+    const school = {
+      name: 'atguigu',
+      template: `
+      <div>
+        <h1>学校名称：{{schoolName}}</h1>
+        <h1>学校地址：{{address}}</h1>
+      </div>
+      `,
+      data() {
+        return {
+          schoolName: '尚硅谷',
+          address: '武汉'
+        }
+      }
+    }
+    new Vue({
+      el: '.root',
+      data: {
+        msg: 'hhh'
+      },
+      components: {
+        'my-school': school,
+      }
+    })
+  </script>
+</body>
+
+</html>

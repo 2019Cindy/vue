@@ -10,3 +10,9 @@ git status查看哪些文件发生了变化
 git diff查看文件发生了哪些变化:（wq退出）
 git config --global core.quotepath false  命令行中文显示乱码
 git rm --cached filename (撤销指定目标文件)
+
+
+
+脚手架安装
+切换新的淘宝镜像源：npm config set registry https://registry.npmmirror.com
+全局安装@vue/cli：npm install -g @vue/cli
