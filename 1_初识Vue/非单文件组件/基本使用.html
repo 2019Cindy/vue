@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>基本组件</title>
+  <script src='../../js/vue.js'></script>
+</head>
+
+<body>
+  <!-- 小结：
+    Vue中使用组件的三大步骤：
+      1.定义组件/创建组件
+      2.注册组件
+      3.使用组件/写组件标签
+      如何定义组件：
+        使用Vue.extend(options)创建，其中options和new Vue(options)时传入的基本一样，但区别如下：
+        （1）el不要写：最终所有的组件都要经过一个vm的管理，由vm中的el决定服务哪个容器
+        （2）data必须写成函数：避免组件被复用时，数据存在引用关系
+        使用template可以配置组件结构
+      如何注册组件：
+        （1）局部注册：靠new Vue的时候传入components选项
+        （2）全局注册：靠Vue.component('组件名',组件)
+      编写组件标签：
+        <school></school>
+  -->
+  <div class="root">
+    <xuexiao></xuexiao>
+    <hr>
+    <student></student>
+  </div>
+
+  <hr>
+  <div class="root2">
+    <hello></hello>
+  </div>
+  <script>
+    // const vm = new Vue({
+    //   el: '.root',
+    //   data: {
+    //     schoolName: '尚硅谷',
+    //     address: '武汉',
+    //     studentName: '张三',
+    //     age: 18
+    //   }
+    // })
+
+
+    // 创建school组件
+    const school = Vue.extend({
+      template: `
+      <div>
+        <h1>学校名称：{{schoolName}}</h1>
+        <h1>学校地址：{{address}}</h1>
+        <button @click='schoolInfo'>点我提示学校名</button>
+      </div>
+      `,
+      // el: '.root', // 组件定义时不要写el，因为最终所有的组件都要被一个vm管理，由vm决定服务于哪个容器
+      data() {
+        return {
+          schoolName: '尚硅谷',
+          address: '武汉',
+        }
+      },
+      methods: {
+        schoolInfo() {
+          alert(this.schoolName)
+        }
+      }
+    })
+
+    const student = Vue.extend({
+      template: `
+      <div>
+        <h1>学生姓名：{{studentName}}</h1>
+        <h1>学生年龄：{{age}}</h1>
+      </div>
+      `,
+      data() {
+        return {
+          studentName: '张三',
+          age: 18
+        }
+      }
+    })
+
+    new Vue({
+      el: '.root',
+      // 组测组件(局部注册)
+      components: {
+        xuexiao: school,
+        student: student,
+      }
+    })
+
+    const hello = Vue.extend({
+      template: `
+        <div>
+          <h1>hello {{name}}</h1>
+        </div>
+      `,
+      data() {
+        return {
+          name: 'world'
+        }
+      }
+    })
+    // 全局注册
+    Vue.component('hello', hello)
+    new Vue({
+      el: '.root2'
+    })
+  </script>
+</body>
+
+</html>

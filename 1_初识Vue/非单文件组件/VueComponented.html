@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VueComponented</title>
+  <script src="../../js/vue.js"></script>
+</head>
+
+<body>
+  <!-- 小结：
+    关于VueComponent：
+      1.school组件本质上是一个名为VueComponent的构造函数，且不失由程序员定义的，是Vue.extend生成的
+      2.我们只需要写<school/>或<school></school>,Vue解析时会帮我们创建school组件的实例对象
+      3.注意：每次调用vue.extend，返回的都是一个新的VueComponent
+      4.关于this的指向：
+        （1）组件配置中：
+        data函数，methods中的函数，watch中的函数，computed中的函数，他们的this均是VueComponet实例对象
+        （2）new Vue(options)配置中：
+        data函数，methods中的函数，watch中的函数，computed中的函数，他们的this均是Vue实例对象
+      5.VueComponent的实例对象，可以简称vc，Vue的实例对象简称vm
+  -->
+  <div class="root">
+    <school></school>
+  </div>
+  <script>
+    const school = Vue.extend({
+      template: `
+        <div>
+          <h1>学校名称：{{schoolName}}</h1>
+          <h1>学校地址：{{address}}</h1>
+          <button @click='showSchoolName'>点我显示学校名</button>
+        </div>
+      `,
+      data() {
+        return {
+          schoolName: '尚硅谷',
+          address: '武汉',
+        }
+      },
+      methods: {
+        showSchoolName() {
+          console.log(this.schoolName)
+          console.log(this) // this指向的是vc
+        }
+      }
+    })
+    new Vue({
+      el: '.root',
+      components: {
+        school
+      }
+    })
+  </script>
+</body>
+
+</html>
