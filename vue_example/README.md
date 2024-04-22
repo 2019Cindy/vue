@@ -116,3 +116,18 @@ ref 属性：
         局部混入：maxins:['xxx']
 ```
 
+### 05:插件
+
+```
+1.功能：
+	用于增强Vue
+2.本质：
+	包含install方法的一个对象，install的第一个参数是vue，第二个及以后的参数是插件使用者传递的数据
+3.定义插件：
+	对象.install=function(Vue,options){
+		....
+	}
+4.使用插件：
+	Vue.use()
+```
+
