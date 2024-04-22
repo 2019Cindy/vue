@@ -1,13 +1,11 @@
 <template>
-  <div class="todo-footer" v-show="total">
+  <div class="todo-footer">
     <label>
       <!-- <input type="checkbox" :checked="isAll" @change="checkAll"/> -->
-      <input type="checkbox" v-model="isAll" />
+      <input type="checkbox" />
     </label>
-    <span>
-      <span>已完成{{ doneTotal }}</span> / 全部{{ total }}
-    </span>
-    <button class="btn btn-danger" @click="clearAll">清除已完成任务</button>
+    <span> <span>已完成</span> / 全部 </span>
+    <button class="btn btn-danger">清除已完成任务</button>
   </div>
 </template>
 

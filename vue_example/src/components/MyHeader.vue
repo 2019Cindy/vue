@@ -10,8 +10,28 @@
 </template>
 
 <script>
+import { nanoid } from "nanoid";
 export default {
   name: "MyHeader",
+  props: ["addTodo"],
+  data() {
+    return {
+      title: "",
+    };
+  },
+  methods: {
+    add() {
+      console.log(this.title);
+      if (this.title) {
+        // 将用户的输入包装成一个todo对象
+        const todoObj = { id: nanoid(), title: this.title, done: false };
+        // 回调，通知app组件添加todo对象
+        this.addTodo(todoObj);
+        // 回车后将值清空
+        this.title = "";
+      }
+    },
+  },
 };
 </script>
 
