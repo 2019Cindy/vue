@@ -32,11 +32,13 @@ export default {
   },
   data() {
     return {
-      todos: [
-        { id: "001", title: "吃饭", done: true },
-        { id: "002", title: "睡觉", done: false },
-        { id: "003", title: "打豆豆", done: false },
-      ],
+      // todos: [
+      //   { id: "001", title: "吃饭", done: true },
+      //   { id: "002", title: "睡觉", done: false },
+      //   { id: "003", title: "打豆豆", done: false },
+      // ],
+      // 本地存储
+      todos: JSON.parse(localStorage.getItem("todos")) || [],
     };
   },
   methods: {
@@ -68,6 +70,14 @@ export default {
       this.todos = this.todos.filter((todo) => {
         return todo.done != true;
       });
+    },
+  },
+  watch: {
+    todos: {
+      deep: true,
+      handler(value) {
+        localStorage.setItem("todos", JSON.stringify(value));
+      },
     },
   },
 };
