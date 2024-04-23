@@ -1,6 +1,6 @@
 <template>
   <ul class="todo-main">
-    <MyItem v-for="todo in todos" :key="todo.id" :item="todo" />
+    <MyItem v-for="todo in todos" :key="todo.id" :item="todo" :checkTodo="checkTodo" :deleteTodo="deleteTodo" />
   </ul>
 </template>
 
@@ -9,7 +9,7 @@ import MyItem from "./MyItem";
 export default {
   name: "MyList",
   components: { MyItem },
-  props: ["todos"],
+  props: ["todos", 'checkTodo', 'deleteTodo'],
 };
 </script>
 
