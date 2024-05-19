@@ -172,5 +172,20 @@ scoped样式
     JSON.parse(null)的结果依然是null。
 ```
 
+### 10：组件的自定义事件
 
+```
+1.一种组件间的通信方式，适用于：子组件 ===> 父组件
+2.使用场景：A是父组件，B是子组件，B给A传递数据，就要在A中给B绑定自定义事件（回调在A中）
+3.绑定自定义事件：
+	1.第一种方式：在父组件中：
+		<Student v-on:atguigu="getStudentName" /> 或
+		<Student @atguigu="getStudentName" />
+	2.第二种方式：在父组件中：
+		<Student ref="student" @click.native="show" />
+		mounted() {
+            // 绑定自定义事件
+            this.$refs.student.$on("atguigu", this.getStudentName);
+        }
+```
 
